@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Verification</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #4A90E2;
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            font-size: 1.5em;
+            color: white;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5em;
+        }
+
+        .navbar .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .verification-section {
+            text-align: center;
+            padding: 5em 1em;
+        }
+
+        .verification-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 1em;
+        }
+
+        .verification-section input {
+            padding: 0.5em;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+
+        .verification-section button {
+            padding: 0.7em 1.5em;
+            margin-left: 1em;
+            font-size: 1.2em;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .verification-section button:hover {
+            background-color: #2ecc71;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 2em;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 1.2em;
+            border-radius: 10px;
+        }
+
+        .popup.verified {
+            border: 2px solid #27ae60;
+        }
+
+        .popup.not-verified {
+            border: 2px solid #e74c3c;
+        }
+
+        .popup button {
+            margin-top: 1em;
+            padding: 0.5em 1em;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">BlockCheck</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#how-it-works">How it Works</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Verification Section -->
+    <section class="verification-section">
+        <h1>Verify Your Product</h1>
+        <p>Enter the Product ID below to check its authenticity:</p>
+        <input type="text" id="productID" placeholder="Enter Product ID">
+        <button onclick="verifyProduct()">Verify</button>
+    </section>
+
+    <!-- Popup for Product Verification Result -->
+    <div class="popup" id="popup">
+        <p id="popup-message"></p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        // Predefined list of valid product IDs
+        const validProductIDs = ["PROD123", "BLOCK456", "AUTH789"];
+
+        // Function to verify product
+        function verifyProduct() {
+            const productID = document.getElementById('productID').value;
+            const popup = document.getElementById('popup');
+            const message = document.getElementById('popup-message');
+
+            if (validProductIDs.includes(productID)) {
+                // If product ID matches, show "Verified" popup
+                popup.classList.add('verified');
+                popup.classList.remove('not-verified');
+                message.textContent = 'Product Verified: This is a legitimate product.';
+            } else {
+                // If no match, show "Not Verified" popup
+                popup.classList.add('not-verified');
+                popup.classList.remove('verified');
+                message.textContent = 'Product Not Verified: This product ID is not recognized.';
+            }
+
+            // Display the popup
+            popup.style.display = 'block';
+        }
+
+        // Function to close the popup
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
